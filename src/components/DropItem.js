@@ -3,16 +3,13 @@ import React from "react";
 import { toast } from "react-toastify";
 
 const DropItem = ({ name }) => {
-  console.log(name);
-
   const commonStyle = {
     border: "2px solid gray",
     height: "100%",
     width: "100%",
   };
   const notify = (action) => {
-    console.log("action" + action);
-    toast("Clicked! " + action);
+    console.log("Clicked! " + action);
   };
 
   switch (name) {
@@ -22,7 +19,7 @@ const DropItem = ({ name }) => {
           style={commonStyle}
           type="text"
           placeholder="Input Field"
-          onSelect={() => notify("Input Field")}
+          onMouseDown={() => notify("Input Field")}
           data-grid={{ x: 0, y: 0, w: 2, h: 1 }}
         />
       );

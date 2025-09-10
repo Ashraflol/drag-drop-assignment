@@ -15,7 +15,6 @@ const DragDropComponent = () => {
   const [droppedItems, setDroppedItems] = useState([]);
 
   const addItemToDropArea = (item) => {
-    console.log("Dropped:", item);
     const matchedItem = itemsList.find((i) => i.id === item.id);
     if (matchedItem) {
       setDroppedItems((prev) => [...prev, matchedItem]);
@@ -30,6 +29,12 @@ const DragDropComponent = () => {
     }),
   }));
 
+  const onLayoutChange = (newLayout) => {
+    console.log(newLayout);
+    // Optionally, save newLayout to localStorage or a backend here
+    // localStorage.setItem('myGridLayout', JSON.stringify(newLayout));
+  };
+
   return (
     <div
       style={{
@@ -41,15 +46,34 @@ const DragDropComponent = () => {
       }}
     >
       {/* Left Panel - Draggable Items */}
-      <div className="items-to-drag" style={{ margin: "20px" }}>
-        <h2>Drag</h2>
+      <div
+        className="items-to-drag"
+        style={{
+          margin: "20px",
+          border: "2px solid gray",
+          padding: "10px",
+          borderRadius: "8px",
+          height: "fit-content",
+        }}
+      >
+        <h2 style={{ marginBottom: "20px" }}>Drag</h2>
         {itemsList.map((item) => (
           <DragItem key={item.id} id={item.id} name={item.name} />
         ))}
       </div>
 
       {/* Right Panel - Drop Zone */}
-      <div className="drop-area" ref={drop} style={{ margin: "20px" }}>
+      <div
+        className="drop-area"
+        ref={drop}
+        style={{
+          margin: "20px",
+          border: "2px solid gray",
+          padding: "10px",
+          borderRadius: "8px",
+          height: "fit-content",
+        }}
+      >
         <h2>Drop</h2>
         <div
           className="drop-zone"
@@ -65,11 +89,26 @@ const DragDropComponent = () => {
             backgroundColor: isOver ? "#f0fff0" : "transparent",
           }}
         >
-          <GridLayout className="layout" cols={12} rowHeight={30} width={600}>
+          <GridLayout
+            onLayoutChange={onLayoutChange}
+            className="layout"
+            cols={12}
+            rowHeight={30}
+            width={600}
+          >
             {droppedItems.map((item, index) => (
               <div
                 key={`${item.id}-${index}`}
-                data-grid={{ x: (index * 2) % 12, y: 0, w: 2, h: 2 }}
+                // apply datagrid on condtion of item name
+                data-grid={
+                  item.name === "Input"
+                    ? { x: 0, y: 0, w: 3, h: 1 }
+                    : item.name === "Button"
+                    ? { x: 0, y: 0, w: 3, h: 1 }
+                    : item.name === "Table"
+                    ? { x: 0, y: 0, w: 4, h: 4 }
+                    : { x: 0, y: 0, w: 2, h: 2 }
+                }
               >
                 <DropItem id={index} name={item.name} />
               </div>
