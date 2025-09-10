@@ -1,5 +1,7 @@
 import React from "react";
 
+import { toast } from "react-toastify";
+
 const DropItem = ({ name }) => {
   console.log(name);
 
@@ -7,6 +9,10 @@ const DropItem = ({ name }) => {
     border: "2px solid gray",
     height: "100%",
     width: "100%",
+  };
+  const notify = (action) => {
+    console.log("action" + action);
+    toast("Clicked! " + action);
   };
 
   switch (name) {
@@ -16,13 +22,18 @@ const DropItem = ({ name }) => {
           style={commonStyle}
           type="text"
           placeholder="Input Field"
+          onSelect={() => notify("Input Field")}
           data-grid={{ x: 0, y: 0, w: 2, h: 1 }}
         />
       );
 
     case "Button":
       return (
-        <button style={commonStyle} data-grid={{ x: 0, y: 0, w: 2, h: 1 }}>
+        <button
+          onMouseDown={() => notify("Button")}
+          style={commonStyle}
+          data-grid={{ x: 0, y: 0, w: 2, h: 1 }}
+        >
           Click Me
         </button>
       );
@@ -32,7 +43,7 @@ const DropItem = ({ name }) => {
         <table
           style={commonStyle}
           border="1"
-          data-grid={{ x: 0, y: 0, w: 4, h: 4 }}
+          data-grid={{ x: 0, y: 0, w: 5, h: 5 }}
         >
           <thead>
             <tr>
@@ -44,10 +55,6 @@ const DropItem = ({ name }) => {
             <tr>
               <td>Data 1</td>
               <td>Data 2</td>
-            </tr>
-            <tr>
-              <td>Data 3</td>
-              <td>Data 4</td>
             </tr>
           </tbody>
         </table>

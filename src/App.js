@@ -6,7 +6,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import DragDropComponent from "./components/DragDropComponent.js";
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
-
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <DndProvider backend={HTML5Backend}>
@@ -16,6 +16,7 @@ function App() {
         </header>
         <DragDropComponent />
       </div>
+      <ToastContainer />
     </DndProvider>
   );
 }

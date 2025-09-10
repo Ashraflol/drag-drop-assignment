@@ -15,11 +15,12 @@ const DragItem = ({ id, name }) => {
     opacity: isDragging ? 0.5 : 1,
     cursor: "move",
     padding: "8px",
+    margin: "8px",
     textAlign: "center",
   };
 
   return (
-    <div ref={drag} style={itemStyle} data-grid={{ x: 4, y: 0, w: 1, h: 2 }}>
+    <div ref={drag} style={itemStyle}>
       {name}
     </div>
   );

@@ -58,7 +58,10 @@ const DragDropComponent = () => {
             minHeight: "300px",
             minWidth: "600px",
             textAlign: "center",
-            padding: "10px",
+            // inset boxshadow
+            boxShadow: isOver
+              ? "inset 0 0 10px rgba(102, 102, 102, 0.5)"
+              : "inset 0 0 10px rgba(133, 133, 133, 0.7)",
             backgroundColor: isOver ? "#f0fff0" : "transparent",
           }}
         >
