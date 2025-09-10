@@ -12,7 +12,7 @@ function App() {
     <DndProvider backend={HTML5Backend}>
       <div className="App">
         <header className="App-header">
-          <h1>Drag and Drop Assignment</h1>
+          <h1 style={{ padding: "20px" }}>Drag and Drop Assignment</h1>
         </header>
         <DragDropComponent />
       </div>
